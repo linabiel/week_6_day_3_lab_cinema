@@ -30,14 +30,43 @@ describe('Cinema', function () {
 
   it('should be able to get a list of film titles', function () {
     const actual = cinema.filmTitle();
-    assert.deepStrictEqual(actual, ['Moonlight', 'Blade Runner 2049', 'Dunkirk', 'Black Panther', 'T2 Trainspotting'])
+    assert.deepStrictEqual(actual, ['Moonlight', 'Blade Runner 2049', 'Dunkirk', 'Black Panther', 'T2 Trainspotting']);
   });
   
-  it('should be able to find a film by title');
-  it('should be able to filter films by genre');
-  it('should be able to check whether there are some films from a particular year');
-  it('should be able to check whether there are no films from a particular year');
-  it('should be able to check whether all films are over a particular length');
-  it('should be able to calculate total running time of all films');
+  it('should be able to find a film by title', function() {
+    const actual = cinema.findByTitle('Black Panther');
+    assert.deepStrictEqual(actual, blackPanther);
+  });
+
+  it('should be able to filter films by genre', function() {
+    const actual = cinema.filterByProperty('genre', 'drama');
+    assert.deepStrictEqual(actual, [moonlight, trainspotting]);
+
+  });
+  
+  it('should be able to check whether there are some films from a particular year', function () {
+    const actual = cinema.filmsByYear(2017);
+    assert.strictEqual(actual, true)
+  });
+
+  it('should be able to check whether there are no films from a particular year', function () {
+    const actual = cinema.filmsByYear(1990);
+    assert.strictEqual(actual, false)
+  }); 
+
+  it('should be able to check whether all films are over a particular length', function () {
+    const actual = cinema.checkFilmLength(90);
+    assert.deepStrictEqual(actual, true)
+  });
+
+  it('should be able to calculate total running time of all films', function () {
+    const actual = cinema.totalRunningTime();
+    assert.deepStrictEqual(actual, 622)
+  });
+
+  it('should be able to filter films by year', function () {
+    const actual = cinema.filterByProperty('year', 2016);
+    assert.deepStrictEqual(actual, [moonlight])
+  });
 
 });
